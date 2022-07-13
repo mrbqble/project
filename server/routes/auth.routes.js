@@ -19,7 +19,7 @@ router.post('/registration',
             return res.status(400).json({message: 'Uncorrect request', errors});
         }
 
-        const {email, password} = req.body;
+        const {email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, volunteeringHours} = req.body;
         const candidate = await User.findOne({email});
 
         if (candidate) {
@@ -27,7 +27,7 @@ router.post('/registration',
         };
 
         const hashPassword = await bcrypt.hash(password, 8);
-        const user  = new User({email, password: hashPassword});
+        const user  = new User({email, password: hashPassword, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, volunteeringHours});
         await user.save();
         return res.json({message: 'User was created'})
 
@@ -60,6 +60,31 @@ router.post('/login',
                 id: user.id,
                 email: user.email
             }
+        })
+    } catch (error) {
+        console.log(error);
+        res.send({message: 'Server error'});
+    };
+});
+
+router.post('/profile',
+    async (req, res) => {
+    try {
+        const {email} = req.body;
+        const user = await User.findOne({email});
+        return res.json({
+                id: user.id,
+                email: user.email,
+                name: user.name,
+                dateOfBirth: user.dateOfBirth,
+                country: user.country,
+                city: user.city,
+                affiliation: user.affiliation,
+                grade: user.grade,
+                phoneNumber: user.phoneNumber,
+                instagram: user.instagram,
+                telegram: user.telegram,
+                volunteeringHours: user.volunteeringHours
         })
     } catch (error) {
         console.log(error);

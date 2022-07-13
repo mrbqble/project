@@ -1,1 +1,3 @@
-/client/src/components/imgs
+./client/src/components/imgs
+./clients/node_modules
+./server/node_modules
