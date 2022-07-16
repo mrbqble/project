@@ -9,9 +9,20 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import {DefaultContext} from "./Context";
 
+// Functions:
+//  1) Sign up                            Done
+//  2) Sign in                            Done
+//  3) Profile                            Done
+//  4) Certification                      Done
+//  5) Event declaration                  
+//  6) Registering to events
+//  7) Reporting system for coordinators
+//  8) 
+
 function App() {
 
   const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      <DefaultContext.Provider value={{email, password, isAuth, setEmail, setPassword, handleSetIsAuth}}>
+      <DefaultContext.Provider value={{user, email, password, isAuth, setEmail, setPassword, setUser, handleSetIsAuth}}>
         <BrowserRouter>
           <Navbar/>
           <Routes>

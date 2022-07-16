@@ -44,3 +44,13 @@ select {
     margin-bottom: 30px;
     width: 444px;
 }
+
+.input {
+    background-color: white;
+    border: 1px solid black;
+    padding: 15px 20px;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    width: 400px;
+}

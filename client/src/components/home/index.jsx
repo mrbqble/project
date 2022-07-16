@@ -78,10 +78,10 @@ const Home = () => {
                     <h1 style={{textAlign: 'left'}}><font>"</font>A person who has<br/>collected a bag of<br/>other people's<br/>garbage will never<br/>throw out his own.<font>"</font></h1>
                     <a href="/story" className='link'>WATCH OUR STORY <img src={bluarr} alt="blue arrow" style={{width: '10px', height: '15px', alignItems: 'center'}}/></a>
                 </div>
-                <div style={{textAlign: 'center', fontWeight: '600'}}>
+                <div className='founder'>
                     <img src={story} alt="founder" style={{height: '320px', width: '480px'}}/>
-                    <p style = {{marginTop: '5px'}}>...ecology starts from our mind.</p>
-                    <p style = {{marginTop: '5px'}}>OUR FOUNDER: ZINAENUR ISLAM</p>
+                    <p>...ecology starts from our mind.</p>
+                    <p>OUR FOUNDER: ZINAENUR ISLAM</p>
                 </div>
             </div>
 

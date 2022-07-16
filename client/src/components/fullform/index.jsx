@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import './fullform.css';
-import {useNavigate} from 'react-router-dom';
 import { registration } from '../../actions/user';
 import { DefaultContext } from "../../Context";
 import { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const countries = ['Kazakhstan', 'Russia', 'Ozbekstan', 'Qyrgystan'];
 const cities = ['Shymkent', 'Almaty', 'Semey', 'Taraz', 'Qostanay', 'Turkestan', 'Nur-Sultan', 'Qyzylorda', 'Qaraganda', 'Aktau', 'Taldyqorgan', 'Uralsk', 'Aqtobe', 'Kokshetau', 'Atyrau'];
@@ -22,10 +24,14 @@ const Fullform = () => {
     const [dateOfBirth, setDateOfBirth] = useState('2022-02-22');
     const [city, setCity] = useState('Shymkent');
     const [grade, setGrade] = useState('1');
-    const [phoneNumber, setPhoneNumber] = useState('+7');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    function capittalize(s) {
+        return s.toLowerCase().replace(/(?<!\p{Lowercase})\p{Lowercase}/gu, ch => ch.toUpperCase())
+    }
 
     const handleName = (event) => {
-        setName(event.target.value);
+        setName(capittalize(event.target.value));
     };
 
     const handleCountry = (event) => {
@@ -57,14 +63,9 @@ const Fullform = () => {
         setGrade(event.target.value);
     };
 
-    const handlephoneNumber = (event) => {
-        setPhoneNumber(event.target.value);
-    };
-
     const handleOnClick = () => {
-        console.log([email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, 0]);
+        console.log(email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, 0);
         registration(email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, 0);
-        navigate('/signin');
     };
 
     return (
@@ -100,8 +101,12 @@ const Fullform = () => {
                         <select placeholder='Choose option' onChange={handleGrade}>
                             {grades.map((item, index) => <option key={index} value={item}>{item}</option>)}
                         </select>
-                        <p>Phone phoneNumber</p>
-                        <input type="phone phoneNumber" value={phoneNumber} onChange={handlephoneNumber}/>
+                        <p>Phone number</p>
+                        <PhoneInput
+                            country={'kz'}
+                            value={phoneNumber}
+                            onChange={phone => setPhoneNumber("+"+phone)}
+                        />
                     </div>
                     <a onClick={() => handleOnClick()} className='button'>SAVE</a>
                 </div>

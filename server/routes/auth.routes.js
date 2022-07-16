@@ -1,5 +1,6 @@
 const Router = require('express');
 const User = require('../models/User');
+const Event = require('../models/Event');
 const bcrypt = require('bcryptjs');
 const config = require('config');
 const jwt = require('jsonwebtoken');
@@ -13,13 +14,15 @@ router.post('/registration',
     ],
     async (req, res) => {
     try {
+
+        const {email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, volunteeringHours} = req.body;
+
         const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
             return res.status(400).json({message: 'Uncorrect request', errors});
         }
-
-        const {email, password, name, dateOfBirth, country, city, affiliation, grade, phoneNumber, instagram, telegram, volunteeringHours} = req.body;
+        
         const candidate = await User.findOne({email});
 
         if (candidate) {
@@ -73,7 +76,6 @@ router.post('/profile',
         const {email} = req.body;
         const user = await User.findOne({email});
         return res.json({
-                id: user.id,
                 email: user.email,
                 name: user.name,
                 dateOfBirth: user.dateOfBirth,
@@ -86,6 +88,18 @@ router.post('/profile',
                 telegram: user.telegram,
                 volunteeringHours: user.volunteeringHours
         })
+    } catch (error) {
+        console.log(error);
+        res.send({message: 'Server error'});
+    };
+});
+
+router.post('/events',
+    async (req, res) => {
+    try {
+        const event = await Event.find();
+        return res.json(event);
+
     } catch (error) {
         console.log(error);
         res.send({message: 'Server error'});

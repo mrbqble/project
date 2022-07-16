@@ -6,7 +6,7 @@
 .footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 40px 0px 40px 0px;
 }
 
@@ -19,12 +19,7 @@ img {
     width: 45px;
 }
 
-.last li {
-    margin-top: 10px;
-}
-
-.last a {
-    margin: 0;
-    padding: 0;
-    margin-right: 10px;
+li {
+    font-size: 18px;
+    margin-top: 12px;
 }
