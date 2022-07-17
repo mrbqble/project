@@ -1,12 +1,18 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/user";
+import { useNavigate } from "react-router-dom";
 import { DefaultContext } from "../../Context";
 
-const Signin = () => {
+export const Signin = () => {
 
+  const {
+    email,
+    password,
+    setEmail,
+    setPassword,
+    handleSetIsAuth,
+  } = useContext(DefaultContext);
   const navigate =  useNavigate();
-  const {handleSetIsAuth, setEmail, setPassword, email, password, setUser} = useContext(DefaultContext);
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -17,7 +23,11 @@ const Signin = () => {
   };
 
   const handleOnClick = () => {
-    login(email, password, handleSetIsAuth);
+    login(
+      email,
+      password,
+      handleSetIsAuth
+    );
     navigate('/')
   };
 
@@ -41,12 +51,9 @@ const Signin = () => {
         </div>
         <a
           className="button"
-          onClick={() => handleOnClick()}>
-          SIGN IN
-        </a>
+          onClick={() => handleOnClick()}
+        >SIGN IN</a>
       </form>
     </div>
   );
 };
-
-export default Signin;

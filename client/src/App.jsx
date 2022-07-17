@@ -1,13 +1,13 @@
-import Navbar from './components/navbar/index';
-import Home from './components/home/index';
-import Footer from './components/footer/index';
-import Registration from './components/registration';
-import FullForm from './components/fullform';
-import SignIn from './components/signin';
-import Profile from './components/profile';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 import {DefaultContext} from "./Context";
+import {Signin} from './components/signin';
+import {Profile} from './components/profile';
+import {Home} from './components/home/index';
+import {Fullform} from './components/fullform';
+import {Navbar} from './components/navbar/index';
+import {Footer} from './components/footer/index';
+import {Registration} from './components/registration';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // Functions:
 //  1) Sign up                            Done
@@ -21,9 +21,8 @@ import {DefaultContext} from "./Context";
 
 function App() {
 
-  const [isAuth, setIsAuth] = useState(false);
-  const [user, setUser] = useState([]);
   const [email, setEmail] = useState('');
+  const [isAuth, setIsAuth] = useState(false);
   const [password, setPassword] = useState('');
 
   const handleSetIsAuth = () => {
@@ -32,20 +31,26 @@ function App() {
 
   return (
     <div className="App">
-      <DefaultContext.Provider value={{user, email, password, isAuth, setEmail, setPassword, setUser, handleSetIsAuth}}>
+      <DefaultContext.Provider value={{
+        email,
+        isAuth,
+        password,
+        setEmail,
+        setPassword,
+        handleSetIsAuth
+      }}>
         <BrowserRouter>
           <Navbar/>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/reg' element={<Registration/>}/>
-            <Route path='/fullform' index element={<FullForm/>}/>
-            <Route path='/signin' element={<SignIn/>}/>
+            <Route path='/signin' element={<Signin/>}/>
             <Route path='/profile' element={<Profile/>}/>
+            <Route path='/reg' element={<Registration/>}/>
+            <Route path='/fullform' index element={<Fullform/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>
       </DefaultContext.Provider>
-      
     </div>
   );
 }

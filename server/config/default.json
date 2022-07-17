@@ -1,5 +1,5 @@
 {
     "serverPort": 1500,
-    "dbUrl": "mongodb+srv://bibol:bibol2148@trial.v6ubr.mongodb.net/?retryWrites=true&w=majority",
-    "secretKey": "new-wave-website-backend"
+    "secretKey": "new-wave-website-backend",
+    "dbUrl": "mongodb+srv://bibol:bibol2148@trial.v6ubr.mongodb.net/?retryWrites=true&w=majority"
 }
