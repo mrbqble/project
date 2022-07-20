@@ -43,10 +43,14 @@ router.post('/registration',
                 return res.status(400).json({message: `User with email ${email} already exist`});
             };
 
+            const type = "Volunteer";
+            const code = "";
             const hashPassword = await bcrypt.hash(password, 8);
             const user  = new User({
                 name,
                 city,
+                code,
+                type,
                 email,
                 grade,
                 country,
@@ -92,6 +96,7 @@ router.post('/login',
                 token,
                 user: {
                     id: user.id,
+                    type: user.type,
                     email: user.email
                 }
             });
@@ -102,35 +107,88 @@ router.post('/login',
 
 router.post('/profile',
     async (req, res) => {
-    try {
-        const {email} = req.body;
-        const user = await User.findOne({email});
-        return res.json({
-                name: user.name,
-                city: user.city,
-                grade: user.grade,
-                email: user.email,
-                country: user.country,
-                telegram: user.telegram,
-                instagram: user.instagram,
-                phoneNumber: user.phoneNumber,
-                affiliation: user.affiliation,
-                dateOfBirth: user.dateOfBirth,
-                volunteeringHours: user.volunteeringHours
-        });
-    } catch (error) {
-        res.send({message: 'Server error'});
-    };
+        try {
+            const {email} = req.body;
+            const user = await User.findOne({email});
+            return res.json({
+                    name: user.name,
+                    city: user.city,
+                    grade: user.grade,
+                    email: user.email,
+                    country: user.country,
+                    telegram: user.telegram,
+                    instagram: user.instagram,
+                    phoneNumber: user.phoneNumber,
+                    affiliation: user.affiliation,
+                    dateOfBirth: user.dateOfBirth,
+                    volunteeringHours: user.volunteeringHours
+            });
+        } catch (error) {
+            res.send({message: 'Server error'});
+        };
 });
 
 router.post('/events',
     async (req, res) => {
-    try {
-        const event = await Event.find();
-        return res.json(event);
-    } catch (error) {
-        res.send({message: 'Server error'});
-    };
+        try {
+            const event = await Event.find();
+            return res.json(event);
+        } catch (error) {
+            res.send({message: 'Server error'});
+        };
 });
+
+router.put('/code',
+    async (req, res) => {
+        try {
+            const {code, email} = req.body;
+            const user = await User.findOne({email});
+            user.code = code;
+            await user.save();
+        } catch (error) {
+            res.send({message: 'Server error'});
+        }
+});
+
+router.post('/check',
+    async (req, res) => {
+        try {
+            const {code} = req.body;
+            const user = await User.findOne({code});
+            return res.json(user);
+        } catch (error) {
+            res.send({message: 'Server error'});
+        }
+    }
+);
+
+router.post('/attend',
+    async (req, res) => {
+        try {
+            const {email, name, _id} = req.body;
+            const event = await Event.findOne({_id});
+            const cus = {email: email, name: name, came: false};
+            event.attended = [...event.attended, cus];
+            await event.save();
+            return res.json({message: 'User attended'});
+        } catch (error) {
+            res.send({message: 'Server error'});
+        }
+    }
+)
+
+router.post('/leave',
+    async (req, res) => {
+        try {
+            const {email, _id} = req.body;
+            const event = await Event.findOne({_id});
+            event.attended = event.attended.filter(item => item.email !== email);
+            await event.save();
+            return res.json({message: 'User left'});
+        } catch (error) {
+            res.send({message: 'Server error'});
+        }
+    }
+)
 
 module.exports = router;

@@ -3,6 +3,8 @@ const {Schema, model} = require("mongoose");
 const User = new Schema({
     name: {type: String},
     city: {type: String},
+    code: {type: String},
+    type: {type: String},
     grade: {type: String},
     country: {type: String},
     telegram: {type: String},

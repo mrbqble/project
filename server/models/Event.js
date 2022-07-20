@@ -6,7 +6,10 @@ const Event = new Schema({
     title: {type: String},
     month: {type: String},
     image: {type: String},
+    hours: {type: Number},
+    places: {type: Number},
     subtext: {type: String},
+    attended: {type: Array},
     subtitle: {type: String}
 });
 
