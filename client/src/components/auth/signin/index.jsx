@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { login, profile } from "../../actions/user";
+import { login, profile } from "../../../actions/user";
 import { useNavigate } from "react-router-dom";
-import { DefaultContext } from "../../Context";
+import { DefaultContext } from "../../../Context";
 
 export const Signin = () => {
 
@@ -9,6 +9,9 @@ export const Signin = () => {
     email,
     password,
     setUser,
+    token,
+    user,
+    users,
     setEmail,
     setPassword,
     handleSetIsAuth,
@@ -24,13 +27,25 @@ export const Signin = () => {
   };
 
   const handleOnClick = () => {
-    login(
-      email,
-      password,
-      handleSetIsAuth
-    );
-    profile(email).then(response => setUser(response));
-    navigate('/')
+    if (users.find(item => item.email === email)){
+      login(
+        email,
+        password,
+        handleSetIsAuth
+      ).then((response) => {
+        if (response.data.message) {
+          alert(response.data.message);
+        } else {
+          profile(email, token).then(response => {
+            setUser(response);
+            localStorage.setItem('user', user);
+            navigate('/');
+          });
+        }
+      });
+    } else {
+      alert("User not found");
+    }
   };
 
   return (

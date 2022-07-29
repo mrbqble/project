@@ -1,7 +1,7 @@
 import './footer.css';
-import TiktokIcon from "../imgs/tiktok.png";
+import TiktokIcon from "../../imgs/tiktok.png";
 import { useNavigate } from 'react-router-dom';
-import InstagramIcon from "../imgs/instagram.png";
+import InstagramIcon from "../../imgs/instagram.png";
 
 export const Footer = () => {
 
@@ -60,6 +60,10 @@ export const Footer = () => {
                 title: 'Become a volunteer',
                 href: '/reg'
             },
+            {
+                title: 'Rating of volunteers',
+                href: '/rating'
+            },
         ],
     ];
 
@@ -90,7 +94,7 @@ export const Footer = () => {
                     }}>
                         <p>NEW WAVE</p>
                     </li>
-                    <li>© 2020</li>
+                    <li>© 2022</li>
                     <li>{message}</li>
                     <li>
                         <a

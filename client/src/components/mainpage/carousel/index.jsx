@@ -1,8 +1,7 @@
 import './carousel.css';
 import { useContext } from "react";
-import bluearr from "../imgs/bluearr.png";
-import { useState, useEffect } from 'react';
-import { DefaultContext } from "../../Context";
+import bluearr from "../../imgs/bluearr.png";
+import { DefaultContext } from "../../../Context";
 import { useNavigate } from 'react-router-dom';
 
 export const Carousel = () => {
@@ -19,7 +18,6 @@ export const Carousel = () => {
     };
 
     const handleMoreEvent = () => {
-        setEvent(events[current]);
         navigate('/event');
     };
 
@@ -42,9 +40,7 @@ export const Carousel = () => {
                             marginBottom: "4vh"
                         }}
                         >{events[current].subtext}</p>
-                        <h2>
-                            {events[current].month} <font>{events[current].day}</font>
-                        </h2>
+                        <h2>{events[current].date}</h2>
                     </div>
                     <a
                         className='link'

@@ -1,11 +1,11 @@
 import './home.css';
-import story from "../imgs/1.png";
-import beach from "../imgs/2.png";
-import bluarr from "../imgs/bluearr.png";
+import story from "../../imgs/1.png";
+import beach from "../../imgs/2.png";
+import bluarr from "../../imgs/bluearr.png";
 import {Carousel} from "../carousel/index";
 import {useNavigate} from 'react-router-dom';
-import plasticInSea from "../imgs/plastic_in_sea.png";
-import plasticbottles from "../imgs/plastic_bottles.png";
+import plasticInSea from "../../imgs/plastic_in_sea.png";
+import plasticbottles from "../../imgs/plastic_bottles.png";
 
 
 export const Home = () => {
@@ -66,12 +66,8 @@ export const Home = () => {
                     <p>Take a small step to save our Planet with us.</p>
                 </div>
             </div>
-            <div className='second block'>
-                <h1>
-                    We save the <font>nature.</font>
-                    <br/>
-                    Together.
-                </h1>
+            <div className='second block' id="about">
+                <h1>We save the <font> nature.</font><br/>Together.</h1>
                 <h2>How do we tackle with environmental issues?</h2>
                 <div className='stats'>
                     {stats.map((item, index) =>
@@ -142,7 +138,7 @@ export const Home = () => {
                 </div>
             </div>
 
-            <div className='fourth block'>
+            <div className='fourth block' id="takeaction">
                 <h1>Why ecology <font>matters?</font></h1>
                 <h2>
                     You probably are concerned about your health.
@@ -193,7 +189,7 @@ export const Home = () => {
                     )}
                 </div>
             </div>
-            <div className='fifth block'>
+            <div className='fifth block' id="community">
                 <h1>Upcoming <font>events</font></h1>
                 <Carousel/>
             </div>

@@ -3,9 +3,10 @@ import { useState } from 'react';
 import { useContext } from "react";
 import 'react-phone-input-2/lib/style.css';
 import PhoneInput from 'react-phone-input-2';
-import { DefaultContext } from "../../Context";
+import { DefaultContext } from "../../../Context";
 import { useNavigate } from 'react-router-dom';
-import { registration } from '../../actions/user';
+import { registration } from '../../../actions/user';
+import { getUsers } from '../../../actions/add';
 
 const countries = [
     'Kazakhstan',
@@ -42,7 +43,9 @@ export const Fullform = () => {
 
     const {
         email,
-        password
+        password,
+        setUsers,
+        users
     } = useContext(DefaultContext);
     const navigate = useNavigate();
     const [name, setName] = useState('');
@@ -76,7 +79,7 @@ export const Fullform = () => {
             affiliation,
             phoneNumber,
             0
-        );
+        ).then((res) => getUsers().then((response) => setUsers(response)));
         navigate('/signin');
     };
 

@@ -2,6 +2,7 @@ const config = require('config');
 const express = require('express');
 const mongoose = require('mongoose');
 const authRouter = require('./routes/auth.routes');
+const addRouter = require('./routes/add.routes');
 
 const app = express();
 const PORT = config.get('serverPort');
@@ -10,6 +11,7 @@ const corsMiddleware = require('./middleware/cors.middleware');
 app.use(corsMiddleware);
 app.use(express.json());
 app.use('/api/auth', authRouter);
+app.use('/api/add', addRouter);
 
 const start = async () => {
     try {
@@ -18,7 +20,7 @@ const start = async () => {
             console.log('Server started on port', PORT);
         });
     } catch (error) {
-        console.log('Failed to connect to the server');
+        console.log('Failed to connect to the server', error);
     };
 };
 

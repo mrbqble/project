@@ -1,15 +1,19 @@
 import './profile.css';
-import logo from "../imgs/nw.png";
+import logo from "../../imgs/nw.png";
 import { certificate } from '../certificate';
-import { DefaultContext } from "../../Context";
+import { DefaultContext } from "../../../Context";
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 export const Profile = () => {
 
     const navigate = useNavigate();
     const year = new Date().getFullYear();
-    const {email, user} = useContext(DefaultContext);
+    const {email, user, setUser} = useContext(DefaultContext);
+
+    if (!user) {
+        setUser(localStorage.getItem('user'));
+    }
 
     const handleCertificate = () => {
         if (user.volunteeringHours){
@@ -29,7 +33,7 @@ export const Profile = () => {
     };
 
     return (
-        <div className="block">
+        <div className="reg block">
             <h1>Profile</h1>
             <div className='inf'>
                 <div className='inf'>
@@ -38,6 +42,7 @@ export const Profile = () => {
                         <span>E-mail:</span>
                         <span>City:</span>
                         <span>Country:</span>
+                        <span>Status:</span>
                         <span>Affiliation:</span>
                         <span>Grade/Course:</span>
                         <span>Phone number:</span>
@@ -56,6 +61,7 @@ export const Profile = () => {
                             <span>{user.email}</span>
                             <span>{user.city}</span>
                             <span>{user.country}</span>
+                            <span>{user.type}</span>
                             <span>{user.affiliation}</span>
                             <span>{user.grade}</span>
                             <span>{user.phoneNumber}</span>
@@ -87,6 +93,13 @@ export const Profile = () => {
                         className='btn'
                         onClick={() => navigate("/")}
                     >EDIT YOUR PROFILE</a>
+                    {user.type === "Coordinator"
+                        ? <a
+                            className='btn'
+                            onClick={() => navigate("/report")}
+                        >REPORT THE EVENT</a>
+                        : <></>
+                    }
                 </div>
             </div>
         </div>

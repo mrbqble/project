@@ -5,6 +5,7 @@ const User = new Schema({
     city: {type: String},
     code: {type: String},
     type: {type: String},
+    came: {type: Boolean},
     grade: {type: String},
     country: {type: String},
     telegram: {type: String},

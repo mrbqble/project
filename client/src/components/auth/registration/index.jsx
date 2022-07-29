@@ -2,14 +2,16 @@ import './registration.css';
 import { useState } from 'react';
 import { useContext } from "react";
 import {useNavigate} from 'react-router-dom';
-import { DefaultContext } from "../../Context";
+import { DefaultContext } from "../../../Context";
 
 export const Registration = () => {
     
     const {
         password,
         setEmail,
-        setPassword
+        setPassword,
+        users,
+        email
     } = useContext(DefaultContext);
     const navigate = useNavigate();
     const [secpass, setSecPass] = useState('');
@@ -27,10 +29,14 @@ export const Registration = () => {
     };
 
     const handleOnClick = () => {
-        if (secpass === password) {
-            navigate('/fullform');
+        if (!users.find(item => item.email === email)) {
+            if (secpass === password) {
+                navigate('/fullform');
+            } else {
+                alert("Enter the password correctly!")
+            }
         } else {
-            alert("Enter the password correctly!")
+            alert(`User with email ${email} already exists!`)
         }
     };
 

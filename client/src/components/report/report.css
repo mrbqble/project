@@ -1,0 +1,27 @@
+.data input {
+    margin: 0px;
+    width: 3.5vw;
+    text-align: center;
+}
+
+.data select {
+    margin: 0px;
+    width: 15vw;
+}
+
+th, td {
+    padding: 20px;
+    font-size: 18px;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+
+th {
+    font-weight: 500;
+    color: #0013BC;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: rgba(208, 213, 255, 0.5);
+}

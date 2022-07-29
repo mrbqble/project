@@ -1,8 +1,11 @@
 .navbar {
     height: 8vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    position: fixed;
+    background-color: white;
 }
 .logo {
     font-size: 24px;
@@ -19,7 +22,7 @@ a {
     text-decoration: none;
 }
 a:hover {
-    color: #D0D5FF;
+    color: #0013BC;
 }
 .button {
     color: white;
